@@ -2,6 +2,12 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+//import App from './app';
+import LoginPage from './app/pages/login/LoginPage';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,7 +22,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>Vite + React !!!</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -31,5 +37,19 @@ function App() {
     </>
   )
 }
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/login" element={<LoginPage />} />
+        {/* Add other routes here */}
+      </Routes>
+    </Router>
+  </React.StrictMode>
+);
+
+
 
 export default App
