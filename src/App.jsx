@@ -38,7 +38,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
+<<<<<<< HEAD
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+=======
+>>>>>>> 1b1ac89c2e1172a72fcaf574d03c213f11c438c0
             </Routes>
         </Router>
     );
