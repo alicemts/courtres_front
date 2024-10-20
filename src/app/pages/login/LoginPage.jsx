@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -24,16 +25,27 @@ const LoginPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Login failed. Please check your credentials.');
+        if (response.status === 401) {
+          throw new Error('Invalid email or password. Please try again.');
+        } else {
+          throw new Error('An unexpected error occurred. Please try again later.');
+        }
       }
 
       const data = await response.json();
       console.log(data); // You can handle the response data here, e.g., store the token in localStorage
 
       // Redirect to another page upon successful login
+    //  navigate('/dashboard');
+    //} catch (err) {
+    //  setError(err.message);
+    //}
+    localStorage.setItem('token', data.token);
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,9 +68,16 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
+        
+        <Link to="/forgot-password" style={{ marginTop: '10px' }}>
+          Forgot Password?
+        </Link>
+                
         <button type="submit" style={{ marginTop: '20px' }}>
           Log In
         </button>
+        
       </form>
     </div>
   );
