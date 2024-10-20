@@ -5,6 +5,8 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LoginPage from './app/pages/login/LoginPage';
 import ForgotPasswordPage from './app/pages/forgotPassword/ForgotPasswordPage';
+import LogoutPage from './app/pages/logout/LogoutPage';
+import RegisterPage from './app/pages/register/RegisterPage';
 
 function Home() {
     const [count, setCount] = useState(0);
@@ -39,6 +41,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="/logout" element={<LogoutPage />}/>
+                <Route path="register" element={<RegisterPage/>}/>
             </Routes>
         </Router>
     );
