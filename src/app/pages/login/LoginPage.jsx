@@ -44,9 +44,8 @@ const LoginPage = () => {
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+    } 
+    
   };
 
   return (

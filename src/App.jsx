@@ -29,6 +29,8 @@ function Home() {
                 <p>Edit <code>src/App.jsx</code> and save to test HMR</p>
             </div>
             <Link to="/login">Go to Login Page</Link>
+            <br />
+            <Link to="/register">Go to Register Page</Link>
 
         </>
     )
@@ -42,7 +44,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/logout" element={<LogoutPage />}/>
-                <Route path="register" element={<RegisterPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
             </Routes>
         </Router>
     );

@@ -1,26 +1,47 @@
 import React, { useEffect } from 'react';  // Import useEffect from React
 import { useNavigate } from 'react-router-dom';
 
+
 const LogoutPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Clear any user authentication (e.g., remove tokens, etc.)
-    // localStorage.removeItem('authToken'); // Example of clearing token or session data
+    const logout = async () => {
+      try {
+        // Send a request to the logout API
+        const response = await fetch('https://aliceronti.atroul.gr/api/logout', {
+          method: 'POST',  // Use POST if that's the expected method for logging out
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Assuming token is stored in localStorage
+          },
+        });
 
-    // Redirect to login page after 2 seconds
-    const timer = setTimeout(() => {
-      navigate('/login');
-    }, 5000);
+        // Check if the response was successful
+        if (response.ok) {
+          // Clear user authentication (e.g., remove tokens)
+          localStorage.removeItem('authToken');
 
-    // Cleanup the timer when the component is unmounted
-    return () => clearTimeout(timer);
+          // Redirect to login page after successful logout
+          navigate('/login');
+        } else {
+          // Handle errors if the response was not successful
+          const errorData = await response.json();
+          console.error('Logout failed:', response.statusText);
+          alert('Logout failed: ' + response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during logout:', error);
+        alert('Network error. Please try again later.');
+      }
+    };
+
+    logout();
   }, [navigate]);
 
   return (
     <div>
-      <h1>You have been logged out</h1>
-      <p>You will be redirected to the login page shortly...</p>
+      <h1>Logging you out...</h1>
     </div>
   );
 };
